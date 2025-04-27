@@ -17,6 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WebApi.Application\WebApi.Application.csproj" />
+    <ProjectReference Include="..\KissMediator\KissMediator.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
 

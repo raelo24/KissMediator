@@ -1,0 +1,32 @@
+name: "publish nuget package"
+
+on: 
+  push: 
+    branches: main
+
+env:
+  PROJECT_PATH: "src/KissMediator/KissMediator.csproj"
+  NUGET_SOURCE_URL: 'https://api.nuget.org/v3/index.json'
+
+jobs:
+  publish:
+    name: "publish nuget package"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+        
+      - name: "Install Dotnet"
+        uses: actions/setup-dotnet@v4
+          
+      - name: "Restore packages"
+        run: dotnet restore ${{ env.PROJECT_PATH }}
+        
+      - name: "Build project"
+        run: dotnet build ${{ env.PROJECT_PATH }} --no-restore --configuration Release
+        
+      - name: "Pack project"
+        run: dotnet pack -c Release -o ./output 
+
+      - name: "Push package"
+        run: dotnet nuget push ./output/*.nupkg --skip-duplicate --source ${{ env.NUGET_SOURCE_URL }}  --api-key ${{ secrets.NUGET_AUTH_TOKEN }}

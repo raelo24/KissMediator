@@ -4,6 +4,11 @@ This mediator builds on the principle of YAGNI(You Ain't Gonna Need It). So, the
 
 ## Usage
 
+To install the package via the package manager, use 
+```
+Install-Package KissMediator
+```
+
 All the commands and notifications can be registered automatically alongside their respective handler implementations using
 
 ```
